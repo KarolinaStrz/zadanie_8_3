@@ -1,17 +1,41 @@
 {
-  "name": "karolina",
+  "name": "nauka-gita",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-	"test": "npm run test:js",
-    "test:js": "glob-run jshint *.js"
+    "test": "npm run test:html && npm run test:js",
+    "test:html": "glob-run nu-html-checker *.html",
+	"test:js": "glob-run jshint *.js",
+    "build": "npm run build:clean && npm run build:sass && npm run build:autoprefixer && npm run test",
+	"build:clean": "node_modules/.bin/rimraf css/*.css",
+    "build:sass": "sass --sourcemap=none --update sass:css",
+    "build:autoprefixer": "autoprefixer-cli css/style.css",
+    "watch": "parallelshell \"npm run watch:sass\" \"npm run watch:autoprefixer\" ",
+    "watch:sass": "sass --watch sass:css",
+    "watch:autoprefixer": "onchange -d 100 css/style.css -- autoprefixer-cli -o css/style.prefixed.css css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarolinaStrz/nauka-gita.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "bugs": {
+    "url": "https://github.com/KarolinaStrz/nauka-gita/issues"
+  },
+  "homepage": "https://github.com/KarolinaStrz/nauka-gita#readme",
+  "dependencies": {
+    "autoprefixer-cli": "^1.0.0",
     "glob-run": "^0.1.6",
-    "jshint": "^2.9.5"
+    "nu-html-checker": "^0.1.0",
+    "valimate-notifier": "^1.0.2"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "onchange": "^3.2.1",
+    "parallelshell": "^3.0.2",
+    "rimraf": "^2.6.2"
   }
 }
