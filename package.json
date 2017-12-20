@@ -29,6 +29,7 @@
   "dependencies": {
     "autoprefixer-cli": "^1.0.0",
     "glob-run": "^0.1.6",
+	"jshint": "^2.9.5",
     "nu-html-checker": "^0.1.0",
     "valimate-notifier": "^1.0.2"
   },
